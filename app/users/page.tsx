@@ -4,6 +4,7 @@ import React from 'react'
 interface User {
   id: number
   name: string
+  email: string
 }
 
 const UsersPage = async () => {
@@ -14,14 +15,29 @@ const UsersPage = async () => {
   const users: User[] = await response.json()
   return (
     <>
-      <h1>Users</h1>
-      <p>{ new Date().toLocaleTimeString() }</p>
-      <ul>
-        {users.map((user) => (
-            <li key={user.id}>{user.name}</li>
-          ))
-        }
-      </ul>
+      <div className="overflow-x-auto">
+        <table className="table">
+          {/* head */}
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+            {users.map((user) => (
+              <tr key={user.id}>
+                <th>{user.id}</th>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+              </tr>
+            ))}
+            
+          </tbody>
+        </table>
+      </div>
     </>
   )
 }
